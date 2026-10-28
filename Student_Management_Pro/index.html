@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Management Pro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-icon">S</span><span>Student<span class="brand-light">Pro</span></span></div>
+    <p class="menu-label">MENU PRINCIPAL</p>
+    <a class="nav-link active" href="#dashboard">▦ <span>Dashboard</span></a>
+    <a class="nav-link" href="#students">♙ <span>Étudiants</span></a>
+    <a class="nav-link" href="#courses">▤ <span>Formations</span></a>
+    <a class="nav-link" href="#attendance">✓ <span>Présences</span></a>
+    <a class="nav-link" href="#results">★ <span>Résultats</span></a>
+    <div class="sidebar-bottom"><div class="avatar">AD</div><div><strong>Admin</strong><small>Administrateur</small></div></div>
+  </aside>
+
+  <main class="main" id="dashboard">
+    <header class="topbar">
+      <div><p class="eyebrow">ESPACE ADMINISTRATEUR</p><h1>Dashboard</h1><p class="muted">Bienvenue dans votre espace de gestion des étudiants.</p></div>
+      <div class="top-actions"><span class="date-pill" id="today"></span><button class="primary" id="addTop">+ Ajouter un étudiant</button></div>
+    </header>
+
+    <section class="stats">
+      <article class="stat-card"><div class="stat-icon purple">♙</div><p>Total étudiants</p><strong id="totalStudents">128</strong><small class="positive">↑ 12% ce semestre</small></article>
+      <article class="stat-card"><div class="stat-icon blue">▤</div><p>Formations actives</p><strong>8</strong><small class="muted">Toutes les filières</small></article>
+      <article class="stat-card"><div class="stat-icon green">✓</div><p>Présence moyenne</p><strong>94.6%</strong><small class="positive">↑ 2.4% ce mois</small></article>
+      <article class="stat-card"><div class="stat-icon orange">★</div><p>Moyenne générale</p><strong>14.2/20</strong><small class="muted">Résultats du semestre</small></article>
+    </section>
+
+    <section class="content-grid">
+      <article class="panel students-panel" id="students">
+        <div class="panel-heading"><div><h2>Liste des étudiants</h2><p class="muted">Gérez les étudiants inscrits.</p></div><button class="outline" id="exportBtn">Exporter CSV ↓</button></div>
+        <div class="toolbar"><input id="searchInput" type="search" placeholder="⌕  Rechercher un étudiant..."><select id="courseFilter"><option value="">Toutes les formations</option><option>Informatique de gestion</option><option>Réseaux informatiques</option><option>Comptabilité</option><option>Marketing</option></select></div>
+        <div class="table-wrap"><table><thead><tr><th>ÉTUDIANT</th><th>FORMATION</th><th>MOYENNE</th><th>STATUT</th><th>ACTION</th></tr></thead><tbody id="studentRows"></tbody></table></div>
+        <p class="table-note" id="tableNote"></p>
+      </article>
+
+      <aside class="right-column">
+        <article class="panel" id="courses"><div class="panel-heading"><div><h2>Formations</h2><p class="muted">Répartition par filière</p></div><span class="dots">•••</span></div>
+          <div class="course-item"><div class="course-badge lavender">IT</div><div class="course-info"><strong>Informatique de gestion</strong><small>42 étudiants</small><div class="progress"><span style="width:72%"></span></div></div></div>
+          <div class="course-item"><div class="course-badge sky">RI</div><div class="course-info"><strong>Réseaux informatiques</strong><small>31 étudiants</small><div class="progress blue-progress"><span style="width:55%"></span></div></div></div>
+          <div class="course-item"><div class="course-badge mint">CO</div><div class="course-info"><strong>Comptabilité</strong><small>28 étudiants</small><div class="progress green-progress"><span style="width:48%"></span></div></div></div>
+          <div class="course-item"><div class="course-badge peach">MA</div><div class="course-info"><strong>Marketing</strong><small>27 étudiants</small><div class="progress orange-progress"><span style="width:43%"></span></div></div></div>
+        </article>
+        <article class="panel activity" id="attendance"><div class="panel-heading"><div><h2>Activité récente</h2><p class="muted">Dernières mises à jour</p></div></div>
+          <div class="activity-item"><span class="activity-dot purple-dot"></span><div><strong>Nouvel étudiant inscrit</strong><p>Sarah Ben Ali · il y a 20 min</p></div></div>
+          <div class="activity-item"><span class="activity-dot green-dot"></span><div><strong>Présences mises à jour</strong><p>Groupe IG2 · il y a 1 h</p></div></div>
+          <div class="activity-item"><span class="activity-dot orange-dot"></span><div><strong>Notes publiées</strong><p>Développement Web · hier</p></div></div>
+        </article>
+      </aside>
+    </section>
+    <footer>© 2026 Student Management Pro <span>Projet de démonstration · Données fictives</span></footer>
+  </main>
+
+  <dialog id="studentDialog">
+    <form id="studentForm">
+      <div class="dialog-heading"><div><h2>Ajouter un étudiant</h2><p class="muted">Remplissez les informations ci-dessous.</p></div><button type="button" class="close" id="closeDialog">×</button></div>
+      <label>Nom complet<input name="name" required placeholder="Ex. Amira Trabelsi"></label>
+      <label>Formation<select name="course" required><option value="">Choisir une formation</option><option>Informatique de gestion</option><option>Réseaux informatiques</option><option>Comptabilité</option><option>Marketing</option></select></label>
+      <label>Moyenne / 20<input name="grade" type="number" min="0" max="20" step="0.1" required placeholder="Ex. 15.5"></label>
+      <label>Statut<select name="status"><option>Actif</option><option>En attente</option></select></label>
+      <div class="dialog-actions"><button type="button" class="outline" id="cancelDialog">Annuler</button><button class="primary" type="submit">Enregistrer</button></div>
+    </form>
+  </dialog>
+  <script src="script.js"></script>
+</body>
+</html>
